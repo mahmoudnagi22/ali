@@ -3,898 +3,487 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قدرة — عرض الشراكة التقنية</title>
+<title>مقترح شراكة تقنية — منصة تطبيقات متعددة الخدمات</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & BASE ===== */
+/* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --navy: #041B44;
-  --royal: #082A63;
-  --teal: #27D3C3;
-  --green: #7ED957;
-  --orange: #F5A623;
+  --bg-deep: #061A40;
+  --bg-surface: #0C285A;
+  --bg-elevated: #112E67;
+  --teal: #1FC8C0;
+  --teal-light: #6BE3C7;
+  --warm: #F2A65A;
   --white: #FFFFFF;
   --gray: #B8C2D1;
-  --dark-surface: #0A1E3D;
-  --card-bg: rgba(8, 42, 99, 0.45);
-  --card-border: rgba(39, 211, 195, 0.15);
-  --slide-w: 1600px;
-  --slide-h: 900px;
+  --gray-dim: rgba(184, 194, 209, 0.5);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-teal: rgba(31, 200, 192, 0.2);
+  --glow-teal: rgba(31, 200, 192, 0.08);
+  --glow-warm: rgba(242, 166, 90, 0.06);
+  --card-bg: rgba(12, 40, 90, 0.55);
+  --card-hover: rgba(17, 46, 103, 0.7);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-card: 0 4px 30px rgba(0,0,0,0.25);
+  --shadow-glow: 0 0 60px rgba(31, 200, 192, 0.07);
 }
 
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Tajawal', sans-serif;
-  background: #020E24;
+  background: #030F26;
   color: var(--white);
   direction: rtl;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
-/* ===== SLIDE CONTAINER ===== */
+/* ===== SLIDE SYSTEM ===== */
 .slide {
-  width: min(100%, var(--slide-w));
+  width: 1600px;
   max-width: 100vw;
-  min-height: var(--slide-h);
+  min-height: 900px;
   margin: 0 auto;
-  padding: 60px 80px;
+  padding: 56px 80px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: var(--navy);
-  border-bottom: 1px solid rgba(39, 211, 195, 0.08);
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-/* ===== COMMON ELEMENTS ===== */
-.slide-header {
+/* ===== SLIDE HEADER / FOOTER ===== */
+.slide-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 44px;
+  flex-shrink: 0;
 }
-
-.slide-logo {
-  height: 64px;
-  opacity: 0.6;
-}
-
+.slide-logo { height: 52px; opacity: 0.58; transition: opacity 0.3s; }
+.slide-logo:hover { opacity: 0.8; }
 .slide-num {
-  font-size: 13px;
-  color: var(--gray);
-  letter-spacing: 2px;
+  font-size: 12px;
+  color: var(--gray-dim);
+  letter-spacing: 3px;
   font-weight: 300;
+  font-variant-numeric: tabular-nums;
+}
+.slide-foot {
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(184, 194, 209, 0.3);
+  flex-shrink: 0;
 }
 
-.section-title {
+/* ===== TYPOGRAPHY ===== */
+.slide-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+.slide-title {
   font-size: 42px;
   font-weight: 800;
-  margin-bottom: 8px;
-  line-height: 1.3;
+  line-height: 1.25;
+  margin-bottom: 10px;
 }
-
-.section-subtitle {
-  font-size: 20px;
+.slide-subtitle {
+  font-size: 19px;
   color: var(--gray);
   font-weight: 400;
+  line-height: 1.75;
+  max-width: 820px;
   margin-bottom: 40px;
-  line-height: 1.7;
-  max-width: 800px;
 }
 
-.accent-line {
-  width: 60px;
-  height: 4px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--teal), var(--green));
-  margin-bottom: 24px;
+/* ===== ACCENT LINES ===== */
+.accent {
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  margin-bottom: 22px;
 }
+.accent-teal { background: linear-gradient(90deg, var(--teal), var(--teal-light)); }
+.accent-warm { background: linear-gradient(90deg, var(--warm), var(--teal)); }
+.accent-mix  { background: linear-gradient(90deg, var(--teal), var(--warm)); }
 
-.accent-line-orange {
-  background: linear-gradient(90deg, var(--orange), var(--teal));
-}
+/* ===== GRIDS ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 
 /* ===== CARDS ===== */
 .card {
   background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 32px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.2s, border-color 0.2s;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 30px;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .card:hover {
-  border-color: rgba(39, 211, 195, 0.35);
-  transform: translateY(-2px);
+  border-color: var(--border-teal);
+  transform: translateY(-3px);
 }
-
+.card-sm { padding: 22px; }
 .card-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
-  font-size: 22px;
-}
-
-.icon-teal { background: rgba(39, 211, 195, 0.15); color: var(--teal); }
-.icon-green { background: rgba(126, 217, 87, 0.15); color: var(--green); }
-.icon-orange { background: rgba(245, 166, 35, 0.15); color: var(--orange); }
-
-.card h3 {
+  margin-bottom: 16px;
   font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
 }
+.ic-teal  { background: rgba(31, 200, 192, 0.12); color: var(--teal); }
+.ic-green { background: rgba(107, 227, 199, 0.12); color: var(--teal-light); }
+.ic-warm  { background: rgba(242, 166, 90, 0.12); color: var(--warm); }
 
-.card p {
-  font-size: 15px;
-  color: var(--gray);
-  line-height: 1.8;
-}
+.card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+.card p  { font-size: 14px; color: var(--gray); line-height: 1.8; }
 
-/* ===== GRID LAYOUTS ===== */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
-.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
-
-/* ===== BULLET LIST ===== */
-.bullet-list {
-  list-style: none;
-  padding: 0;
-}
-.bullet-list li {
+/* ===== BULLETS ===== */
+.bullets { list-style: none; padding: 0; }
+.bullets li {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 18px;
-  font-size: 18px;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  gap: 13px;
+  margin-bottom: 16px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.88);
 }
-.bullet-list li::before {
+.bullets li::before {
   content: '';
-  min-width: 10px;
-  height: 10px;
+  min-width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--teal);
   margin-top: 10px;
   flex-shrink: 0;
 }
-.bullet-list.orange li::before { background: var(--orange); }
+.bullets.warm li::before { background: var(--warm); }
 
-/* ===== BADGE ===== */
+/* ===== BADGES ===== */
 .badge {
   display: inline-block;
-  padding: 6px 18px;
+  padding: 5px 16px;
   border-radius: 100px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-.badge-teal { background: rgba(39, 211, 195, 0.12); color: var(--teal); border: 1px solid rgba(39, 211, 195, 0.25); }
-.badge-orange { background: rgba(245, 166, 35, 0.12); color: var(--orange); border: 1px solid rgba(245, 166, 35, 0.25); }
+.badge-teal { background: rgba(31, 200, 192, 0.1); color: var(--teal); border: 1px solid rgba(31, 200, 192, 0.22); }
+.badge-warm { background: rgba(242, 166, 90, 0.1); color: var(--warm); border: 1px solid rgba(242, 166, 90, 0.22); }
+
+/* ===== GLOW DECORATION ===== */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  pointer-events: none;
+}
+
+/* ===== ECOSYSTEM VISUAL ===== */
+.eco-hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+.eco-center {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(31,200,192,0.15), rgba(107,227,199,0.05));
+  border: 2px solid var(--border-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 800;
+  font-size: 18px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 60px rgba(31,200,192,0.1);
+}
+.eco-ring {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.eco-node {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 180px;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.25s;
+}
+.eco-node:hover { border-color: var(--border-teal); }
+.eco-connector {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.eco-connector span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--border-teal), transparent);
+}
 
 /* ===== TIMELINE ===== */
 .timeline {
-  position: relative;
   display: flex;
+  position: relative;
   gap: 0;
-  justify-content: stretch;
 }
 .timeline::before {
   content: '';
   position: absolute;
-  top: 36px;
+  top: 34px;
   right: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(to left, var(--teal), var(--green), var(--orange));
+  background: linear-gradient(to left, var(--teal), var(--teal-light), var(--warm));
   border-radius: 3px;
 }
-.timeline-item {
+.tl-item {
   flex: 1;
   text-align: center;
   position: relative;
-  padding: 0 16px;
+  padding: 0 14px;
 }
-.timeline-dot {
-  width: 20px;
-  height: 20px;
+.tl-dot {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: 3px solid var(--navy);
-  margin: 26px auto 24px;
+  border: 3px solid var(--bg-deep);
+  margin: 25px auto 20px;
   position: relative;
   z-index: 2;
 }
-.timeline-item:nth-child(1) .timeline-dot { background: var(--teal); }
-.timeline-item:nth-child(2) .timeline-dot { background: var(--green); }
-.timeline-item:nth-child(3) .timeline-dot { background: var(--orange); }
-.timeline-item:nth-child(4) .timeline-dot { background: var(--teal); }
-
-.timeline-phase {
-  font-size: 14px;
+.tl-item:nth-child(1) .tl-dot { background: var(--teal); }
+.tl-item:nth-child(2) .tl-dot { background: var(--teal-light); }
+.tl-item:nth-child(3) .tl-dot { background: var(--warm); }
+.tl-item:nth-child(4) .tl-dot { background: var(--teal); }
+.tl-phase {
+  font-size: 12px;
   font-weight: 700;
   color: var(--teal);
-  margin-bottom: 8px;
+  letter-spacing: 1px;
 }
-.timeline-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-.timeline-desc {
-  font-size: 14px;
-  color: var(--gray);
-  line-height: 1.7;
-}
-
-/* ===== PRICING BOX ===== */
-.price-box {
-  background: linear-gradient(135deg, rgba(39, 211, 195, 0.08), rgba(126, 217, 87, 0.05));
-  border: 2px solid rgba(39, 211, 195, 0.25);
-  border-radius: 20px;
-  padding: 50px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
-.price-amount {
-  font-size: 64px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--teal), var(--green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.price-unit {
-  font-size: 22px;
-  color: var(--gray);
-  margin-top: 4px;
-}
-
-/* ===== FOOTER ===== */
-.slide-footer {
-  margin-top: auto;
-  padding-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: rgba(184, 194, 209, 0.4);
-}
-
-/* ===== DECORATIVE ===== */
-.glow-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  opacity: 0.15;
-}
-
-.stat-number {
-  font-size: 52px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--teal), var(--green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ===== TWO-COL LAYOUT ===== */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-  flex: 1;
-}
-
-/* ===== COVER SLIDE ===== */
-.cover-slide {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: linear-gradient(160deg, #041B44 0%, #082A63 40%, #0A1E3D 100%);
-}
-.cover-slide .glow-1 {
-  width: 500px; height: 500px;
-  background: var(--teal);
-  top: -100px; left: -100px;
-}
-.cover-slide .glow-2 {
-  width: 400px; height: 400px;
-  background: var(--orange);
-  bottom: -80px; right: -80px;
-  opacity: 0.1;
-}
-.cover-logo {
-  height: 180px;
-  margin-bottom: 40px;
-  filter: drop-shadow(0 0 40px rgba(39, 211, 195, 0.2));
-}
-.cover-title {
-  font-size: 52px;
-  font-weight: 900;
-  line-height: 1.3;
-  margin-bottom: 16px;
-}
-.cover-subtitle {
-  font-size: 22px;
-  color: var(--gray);
-  font-weight: 400;
-  max-width: 700px;
-  margin: 0 auto 30px;
-  line-height: 1.7;
-}
-.cover-divider {
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--teal), var(--green));
-  border-radius: 4px;
-  margin: 0 auto 24px;
-}
-.cover-meta {
-  font-size: 15px;
-  color: var(--gray);
-  opacity: 0.7;
-}
-
-/* ===== STEPS ===== */
-.steps {
-  display: flex;
-  gap: 20px;
-  counter-reset: step;
-}
-.step-item {
-  flex: 1;
-  counter-increment: step;
-  position: relative;
-  padding: 28px 24px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-}
-.step-item::before {
-  content: counter(step);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--teal), var(--green));
-  color: var(--navy);
-  font-weight: 800;
-  font-size: 16px;
-  margin-bottom: 14px;
-}
-.step-item h4 {
+.tl-title {
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 8px;
+  margin-top: 4px;
 }
-.step-item p {
-  font-size: 14px;
+.tl-desc {
+  font-size: 13px;
   color: var(--gray);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-/* ===== ERP MODULES GRID ===== */
-.erp-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-.erp-module {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 24px 18px;
+/* ===== PRICE PANEL ===== */
+.price-panel {
+  background: linear-gradient(135deg, rgba(31,200,192,0.06), rgba(242,166,90,0.04));
+  border: 2px solid var(--border-teal);
+  border-radius: 24px;
+  padding: 52px 48px;
   text-align: center;
-  transition: border-color 0.2s, transform 0.2s;
+  max-width: 620px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-glow);
 }
-.erp-module:hover {
-  border-color: rgba(39, 211, 195, 0.4);
-  transform: translateY(-2px);
+.price-val {
+  font-size: 68px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
 }
-.erp-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  margin: 0 auto 12px;
+.price-unit {
+  font-size: 21px;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+/* ===== STEPS FLOW ===== */
+.flow {
+  display: flex;
+  gap: 18px;
+  counter-reset: flowstep;
+}
+.flow-item {
+  flex: 1;
+  counter-increment: flowstep;
+  padding: 26px 22px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  position: relative;
+}
+.flow-item::before {
+  content: counter(flowstep);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-}
-.erp-module h4 {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  color: var(--bg-deep);
+  font-weight: 800;
   font-size: 15px;
-  font-weight: 700;
+  margin-bottom: 12px;
 }
-.erp-module p {
-  font-size: 12px;
+.flow-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.flow-item p  { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+/* ===== MODULE TILES ===== */
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.mod-tile {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 22px 16px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.mod-tile:hover {
+  border-color: var(--border-teal);
+  transform: translateY(-2px);
+}
+.mod-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.mod-tile h4 { font-size: 14px; font-weight: 700; }
+.mod-tile p  { font-size: 11px; color: var(--gray); margin-top: 3px; }
+
+/* ===== PLACEHOLDER BLOCKS ===== */
+.placeholder-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.placeholder-item {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 20px 22px;
+  font-size: 14px;
+  color: var(--gray-dim);
+  text-align: center;
+  line-height: 1.7;
+}
+.placeholder-item strong {
+  display: block;
   color: var(--gray);
-  margin-top: 4px;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
-/* ===== CTA / CLOSING ===== */
+/* ===== COVER SLIDE ===== */
+.cover {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(160deg, #061A40 0%, #0C285A 45%, #081E4A 100%);
+  min-height: 900px;
+}
+.cover-logo {
+  height: 150px;
+  margin-bottom: 36px;
+  filter: drop-shadow(0 0 50px rgba(31,200,192,0.15));
+}
+.cover-divider {
+  width: 90px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  border-radius: 3px;
+  margin: 0 auto 22px;
+}
+.cover-title {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  max-width: 900px;
+}
+.cover-sub {
+  font-size: 20px;
+  color: var(--gray);
+  font-weight: 400;
+  max-width: 750px;
+  margin: 0 auto 28px;
+  line-height: 1.8;
+}
+.cover-meta {
+  font-size: 13px;
+  color: var(--gray-dim);
+}
+
+/* ===== CTA SLIDE ===== */
 .cta-slide {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(160deg, #041B44 0%, #082A63 50%, #041B44 100%);
+  background: linear-gradient(160deg, #061A40 0%, #0C285A 50%, #061A40 100%);
 }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1200px) {
-  :root {
-    --slide-h: auto;
-  }
-
-  .slide {
-    width: 100%;
-    min-height: auto;
-    padding: 48px 40px;
-  }
-
-  .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .erp-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .steps {
-    flex-wrap: wrap;
-  }
-
-  .step-item {
-    min-width: calc(50% - 10px);
-  }
-
-  .timeline {
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .timeline::before {
-    display: none;
-  }
-
-  .timeline-item {
-    flex: 1 1 calc(50% - 12px);
-    padding: 0;
-  }
+.cta-box {
+  max-width: 640px;
+  padding: 36px 44px;
+  border: 1px solid var(--border-teal);
+  border-radius: var(--radius);
+  background: rgba(31,200,192,0.03);
 }
-
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden;
-  }
-
-  .slide {
-    padding: 28px 18px;
-    max-width: 100%;
-    min-height: auto;
-  }
-
-  .slide-header,
-  .slide-footer {
-    gap: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 28px;
-  }
-
-  .slide-footer {
-    padding-top: 24px;
-    margin-top: 32px;
-  }
-
-  .slide-logo {
-    height: 52px;
-  }
-
-  .section-title {
-    font-size: 30px;
-  }
-
-  .section-subtitle {
-    font-size: 17px;
-    line-height: 1.8;
-    margin-bottom: 28px;
-  }
-
-  .cover-logo {
-    height: 132px;
-    margin-bottom: 28px;
-  }
-
-  .cover-title {
-    font-size: 34px;
-  }
-
-  .cover-subtitle {
-    font-size: 18px;
-    max-width: 100%;
-    margin-bottom: 24px;
-  }
-
-  .cover-meta {
-    font-size: 13px;
-  }
-
-  .accent-line,
-  .cover-divider {
-    margin-bottom: 18px;
-  }
-
-  .grid-2,
-  .grid-3,
-  .grid-4,
-  .two-col,
-  .erp-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-  }
-
-  .grid-2 > *,
-  .grid-3 > *,
-  .grid-4 > *,
-  .two-col > *,
-  .erp-grid > * {
-    min-width: 0;
-    width: 100%;
-  }
-
-  .card {
-    padding: 22px 18px;
-  }
-
-  .card h3 {
-    font-size: 18px;
-  }
-
-  .card p,
-  .bullet-list li {
-    font-size: 15px;
-  }
-
-  .bullet-list li {
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .price-box {
-    padding: 28px 18px;
-    max-width: 100%;
-  }
-
-  .price-amount {
-    font-size: 46px;
-  }
-
-  .price-unit {
-    font-size: 18px;
-  }
-
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 12px !important;
-  }
-
-  .timeline-item {
-    text-align: right;
-    padding: 18px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-  }
-
-  .timeline-dot {
-    margin: 12px 0 16px;
-  }
-
-  .timeline-phase,
-  .timeline-title,
-  .timeline-desc {
-    text-align: right;
-  }
-
-  .steps {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .step-item {
-    min-width: 100%;
-    padding: 20px 18px;
-  }
-
-  .step-item h4 {
-    font-size: 16px;
-  }
-
-  .step-item p {
-    font-size: 13px;
-  }
-
-  .erp-module {
-    padding: 18px 14px;
-  }
-
-  .erp-module h4 {
-    font-size: 14px;
-  }
-
-  .erp-module p {
-    font-size: 12px;
-  }
-
-  .badge {
-    font-size: 12px;
-    line-height: 1.6;
-    padding: 7px 14px;
-    white-space: normal;
-  }
-
-  .glow-circle {
-    opacity: 0.08;
-    filter: blur(90px);
-  }
-
-  .cta-slide img[alt="قدرة"] {
-    height: 100px !important;
-    margin-bottom: 28px !important;
-  }
-
-  .cta-slide .section-title {
-    font-size: 32px !important;
-  }
-
-  .cta-slide p[style*="font-size:21px"] {
-    font-size: 17px !important;
-    margin-bottom: 28px !important;
-  }
-
-  .cta-slide div[style*="margin-top:50px"] {
-    margin-top: 28px !important;
-    padding: 22px 18px !important;
-    max-width: 100% !important;
-  }
-
-  section.slide:nth-of-type(2) .grid-3,
-  section.slide:nth-of-type(3) .two-col,
-  section.slide:nth-of-type(4) .grid-3,
-  section.slide:nth-of-type(5) .two-col,
-  section.slide:nth-of-type(7) .grid-2,
-  section.slide:nth-of-type(11) .grid-3,
-  section.slide:nth-of-type(13) .steps {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 16px !important;
-  }
-
-  section.slide:nth-of-type(2) .grid-3 > *,
-  section.slide:nth-of-type(3) .two-col > *,
-  section.slide:nth-of-type(4) .grid-3 > *,
-  section.slide:nth-of-type(5) .two-col > *,
-  section.slide:nth-of-type(7) .grid-2 > *,
-  section.slide:nth-of-type(11) .grid-3 > *,
-  section.slide:nth-of-type(13) .steps > * {
-    min-width: 0 !important;
-    width: 100% !important;
-  }
-
-  section.slide:nth-of-type(2) .card,
-  section.slide:nth-of-type(4) .card {
-    padding: 20px 16px !important;
-  }
-
-  section.slide:nth-of-type(2) .card h3,
-  section.slide:nth-of-type(4) .card h3 {
-    font-size: 17px !important;
-    line-height: 1.5;
-  }
-
-  section.slide:nth-of-type(2) .card p,
-  section.slide:nth-of-type(4) .card p {
-    font-size: 14px !important;
-    line-height: 1.9 !important;
-  }
-
-  section.slide:nth-of-type(5) .badge {
-    margin-bottom: 10px !important;
-  }
-
-  section.slide:nth-of-type(5) h3[style*="font-size:24px"] {
-    font-size: 18px !important;
-    line-height: 1.5 !important;
-  }
-
-  section.slide:nth-of-type(5) p[style*="font-size:16px"],
-  section.slide:nth-of-type(5) p[style*="font-size:17px"] {
-    font-size: 14px !important;
-    line-height: 1.9 !important;
-  }
-
-  section.slide:nth-of-type(5) .card {
-    padding: 20px 16px !important;
-  }
-
-  section.slide:nth-of-type(3) .bullet-list li {
-    font-size: 16px !important;
-    line-height: 1.8 !important;
-  }
-
-  section.slide:nth-of-type(3) .card p[style*="font-size:19px"] {
-    font-size: 17px !important;
-    line-height: 1.9 !important;
-  }
-
-  section.slide:nth-of-type(6) .grid-4,
-  section.slide:nth-of-type(8) .erp-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 14px !important;
-  }
-
-  section.slide:nth-of-type(6) .card,
-  section.slide:nth-of-type(8) .erp-module {
-    padding: 18px 12px !important;
-  }
-
-  section.slide:nth-of-type(6) .card h3,
-  section.slide:nth-of-type(8) .erp-module h4 {
-    font-size: 15px !important;
-    line-height: 1.45 !important;
-  }
-
-  section.slide:nth-of-type(6) .card p,
-  section.slide:nth-of-type(8) .erp-module p {
-    font-size: 12px !important;
-    line-height: 1.7 !important;
-  }
-
-  section.slide:nth-of-type(6) .card-icon,
-  section.slide:nth-of-type(8) .erp-icon {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 16px !important;
-    margin-bottom: 10px !important;
-  }
-
-  section.slide:nth-of-type(7) h3[style*="font-size:20px"] {
-    font-size: 18px !important;
-    margin-bottom: 16px !important;
-  }
-
-  section.slide:nth-of-type(7) .card[style*="display:flex"] {
-    padding: 18px 14px !important;
-    gap: 12px !important;
-    align-items: flex-start !important;
-  }
-
-  section.slide:nth-of-type(7) .card h4,
-  section.slide:nth-of-type(7) h4[style*="font-size:16px"] {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-  }
-
-  section.slide:nth-of-type(7) .card p,
-  section.slide:nth-of-type(7) p[style*="font-size:13px"] {
-    font-size: 13px !important;
-    line-height: 1.8 !important;
-  }
-
-  section.slide:nth-of-type(11) .card {
-    padding: 20px 16px !important;
-  }
-
-  section.slide:nth-of-type(11) .card h3 {
-    font-size: 17px !important;
-    line-height: 1.5 !important;
-  }
-
-  section.slide:nth-of-type(11) .card p {
-    font-size: 14px !important;
-    line-height: 1.9 !important;
-  }
-
-  section.slide:nth-of-type(11) .card > div[style*="width:56px"] {
-    width: 46px !important;
-    height: 46px !important;
-    margin-bottom: 14px !important;
-    font-size: 20px !important;
-  }
-
-  section.slide:nth-of-type(13) .steps {
-    max-width: 100% !important;
-    margin: 0 auto !important;
-  }
-
-  section.slide:nth-of-type(13) .step-item {
-    text-align: center;
-    padding: 20px 16px !important;
-  }
-
-  section.slide:nth-of-type(13) .step-item h4 {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-  }
-
-  section.slide:nth-of-type(13) .step-item p {
-    font-size: 13px !important;
-    line-height: 1.8 !important;
-  }
-
-  section.slide:nth-of-type(13) p[style*="font-size:19px"] {
-    font-size: 17px !important;
-    line-height: 1.9 !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .slide {
-    padding: 24px 14px;
-  }
-
-  .slide-logo {
-    height: 46px;
-  }
-
-  .cover-logo {
-    height: 112px;
-  }
-
-  .cover-title,
-  .cta-slide .section-title {
-    font-size: 28px !important;
-  }
-
-  .section-title {
-    font-size: 26px;
-  }
-
-  .section-subtitle,
-  .cover-subtitle,
-  .cta-slide p[style*="font-size:21px"] {
-    font-size: 16px !important;
-  }
-
-  .price-amount {
-    font-size: 38px;
-  }
-
-  .badge {
-    font-size: 11px;
-  }
-
-  section.slide:nth-of-type(6) .grid-4,
-  section.slide:nth-of-type(8) .erp-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  section.slide:nth-of-type(6) .card,
-  section.slide:nth-of-type(8) .erp-module,
-  section.slide:nth-of-type(7) .card {
-    padding: 16px 12px !important;
-  }
-
-  section.slide:nth-of-type(11) .card,
-  section.slide:nth-of-type(13) .step-item {
-    padding: 16px 12px !important;
-  }
+.cta-box p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.85;
 }
 
 /* ===== PRINT ===== */
@@ -908,613 +497,958 @@ body {
     -webkit-print-color-adjust: exact;
   }
 }
+
+/* ===== RESPONSIVE CLAMP ===== */
+@media (max-width: 1600px) {
+  .slide { padding: 48px 56px; }
+}
+
+@media (max-width: 1200px) {
+  .slide {
+    width: 100%;
+    min-height: auto;
+    padding: 40px 36px;
+  }
+  .slide-title { font-size: 36px; }
+  .slide-subtitle { font-size: 17px; margin-bottom: 32px; }
+  .grid-4,
+  .grid-5,
+  .mod-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two-col { gap: 32px; }
+  .timeline {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .timeline::before { display: none; }
+  .tl-item {
+    flex: 1 1 calc(50% - 10px);
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .tl-dot { margin-top: 12px; }
+  .flow {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .flow-item { flex: 1 1 calc(50% - 8px); }
+  .price-panel {
+    max-width: none;
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 820px) {
+  .slide {
+    padding: 28px 18px;
+    min-height: auto;
+    overflow: visible;
+  }
+  .slide-head,
+  .slide-foot {
+    gap: 12px;
+  }
+  .slide-head {
+    margin-bottom: 28px;
+    align-items: center;
+  }
+  .slide-foot {
+    margin-top: 28px;
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .slide-logo { height: 48px; }
+  .slide-num {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .slide-label { font-size: 11px; }
+  .slide-title {
+    font-size: 28px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .slide-subtitle {
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+  .cover {
+    min-height: 100svh;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .cover-logo {
+    height: 132px;
+    margin-bottom: 28px;
+  }
+  .cover-title {
+    font-size: 34px;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+  .cover-sub {
+    font-size: 16px;
+    max-width: 100%;
+    margin-bottom: 22px;
+  }
+  .cover-sub br,
+  .cta-slide p br { display: none; }
+  .cover-meta { font-size: 12px; }
+  .card,
+  .card-sm,
+  .placeholder-item,
+  .flow-item,
+  .tl-item,
+  .mod-tile,
+  .cta-box,
+  .price-panel {
+    padding: 20px 16px;
+  }
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .two-col,
+  .mod-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .bullets li {
+    font-size: 15px;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .eco-hub {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .eco-ring {
+    width: 100%;
+    gap: 12px;
+  }
+  .eco-node {
+    min-width: 0;
+    width: 100%;
+    padding: 14px 16px;
+  }
+  .eco-center {
+    width: 130px;
+    height: 130px;
+    font-size: 16px;
+  }
+  .eco-connector {
+    width: 2px;
+    height: 28px;
+  }
+  .eco-connector span {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--border-teal), transparent);
+  }
+  .timeline {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tl-item {
+    flex: 1 1 100%;
+    text-align: right;
+  }
+  .tl-dot {
+    margin: 10px 0 14px;
+  }
+  .tl-phase,
+  .tl-title,
+  .tl-desc {
+    text-align: right;
+  }
+  .flow {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .flow-item { flex: 1 1 100%; }
+  .flow-item::before { margin-bottom: 10px; }
+  .price-val { font-size: 48px; }
+  .price-unit { font-size: 17px; }
+  .badge {
+    font-size: 11px;
+    line-height: 1.8;
+    padding: 6px 12px;
+  }
+  .cta-slide { padding-top: 40px; padding-bottom: 40px; }
+  .cta-slide > img {
+    height: 100px !important;
+    margin-bottom: 24px !important;
+  }
+  .cta-box p { font-size: 17px; }
+}
+
+@media (max-width: 560px) {
+  .slide { padding: 24px 14px; }
+  .cover-logo {
+    height: 116px;
+    margin-bottom: 24px;
+  }
+  .cover-title { font-size: 30px; }
+  .slide-title { font-size: 25px; }
+  .slide-subtitle { font-size: 14px; }
+  .price-val { font-size: 42px; }
+  .price-unit { font-size: 15px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ============================================= -->
-<!-- SLIDE 1: COVER -->
-<!-- ============================================= -->
-<section class="slide cover-slide">
-  <div class="glow-circle glow-1"></div>
-  <div class="glow-circle glow-2"></div>
-  
-  <img src="./logo.png" alt="قدرة" class="cover-logo" onerror="this.style.display='none'">
-  
+<!-- ============================================================ -->
+<!-- SLIDE 01 — COVER                                              -->
+<!-- ============================================================ -->
+<section class="slide cover">
+  <div class="glow" style="width:550px;height:550px;background:var(--teal);top:-140px;left:-120px;opacity:0.1;"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);bottom:-100px;right:-100px;opacity:0.07;"></div>
+
+  <img src="./logo.png" alt="الشعار" class="cover-logo" onerror="this.style.display='none'">
   <div class="cover-divider"></div>
-  <h1 class="cover-title">عرض الشراكة التقنية</h1>
-  <p class="cover-subtitle">نحو تحوّل رقمي مستدام من خلال شراكة تقنية طويلة الأمد<br>تشمل بناء الأنظمة، تطوير منصة ERP، والدعم التقني المستمر</p>
-  <p class="cover-meta">وثيقة سرّية — مُعدّة خصيصاً لشريكنا المحتمل</p>
+  <h1 class="cover-title">مقترح شراكة تقنية<br>لتطوير منصة تطبيقات متعددة الخدمات</h1>
+  <p class="cover-sub">منظومة رقمية متكاملة تشمل التجارة الإلكترونية، التوصيل، إدارة التجار،<br>والخدمات المجتمعية — مبنية على شراكة تقنية طويلة الأمد</p>
+  <p class="cover-meta">وثيقة سرّية — مُعدّة خصيصاً للعميل</p>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 2: WHO WE ARE -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 02 — WHO WE ARE                                         -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
+  <div class="slide-head">
     <span class="slide-num">02</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">من نحن</h2>
-  <p class="section-subtitle">بيت خبرة تقني متخصص في بناء المنتجات الرقمية والأنظمة التشغيلية للشركات</p>
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">تعريف</span>
+  <h2 class="slide-title">من نحن</h2>
+  <p class="slide-subtitle">بيت خبرة تقني متخصص في بناء المنتجات الرقمية والمنصات متعددة الأطراف — نعمل كشريك تنفيذي طويل الأمد وليس كمزوّد خدمة مؤقت.</p>
 
   <div class="grid-3" style="flex:1; align-content:start;">
     <div class="card">
-      <div class="card-icon icon-teal">⚙</div>
-      <h3>بناء الأنظمة</h3>
-      <p>نصمم ونبني أنظمة تشغيلية متكاملة مصممة خصيصاً لطبيعة عملك، وليست حلولاً جاهزة عامة.</p>
+      <div class="card-icon ic-teal">⚙</div>
+      <h3>بناء المنصات الرقمية</h3>
+      <p>نصمم ونطوّر منصات متعددة الأطراف — تطبيقات جوال، لوحات تحكم، وأنظمة خلفية — بمعايير هندسية احترافية.</p>
     </div>
     <div class="card">
-      <div class="card-icon icon-green">◈</div>
+      <div class="card-icon ic-green">◈</div>
       <h3>تفكير منتجي</h3>
-      <p>نتعامل مع كل نظام كمنتج رقمي قابل للتطور المستمر، وليس مشروعاً ينتهي بالتسليم.</p>
+      <p>لا نبني مشاريع تنتهي بالتسليم. نبني منتجات رقمية قابلة للنمو والتطور المستمر مع تطور أعمالكم.</p>
     </div>
     <div class="card">
-      <div class="card-icon icon-orange">⟐</div>
-      <h3>شراكة طويلة الأمد</h3>
-      <p>نؤمن بنموذج الشراكة المستمرة مع عملائنا، حيث نكون الذراع التقني الذي ينمو مع أعمالهم.</p>
+      <div class="card-icon ic-warm">⟐</div>
+      <h3>شراكة مستمرة</h3>
+      <p>نؤمن بنموذج الشراكة الشهرية المستدامة — نكون ذراعكم التقني الذي يبني ويطوّر ويدعم بشكل دائم.</p>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 3: UNDERSTANDING CLIENT NEEDS -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 03 — CREDIBILITY & READINESS                            -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
+  <div class="slide-head">
     <span class="slide-num">03</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">فهمنا لاحتياجكم</h2>
-  <p class="section-subtitle">ندرك أن شركتكم تحتاج إلى شريك تقني موثوق يُترجم الرؤية إلى أنظمة عمل فعلية</p>
-
-  <div class="two-col" style="flex:1;">
-    <div>
-      <ul class="bullet-list">
-        <li>تحتاجون إلى أنظمة تقنية متكاملة تخدم عملياتكم اليومية</li>
-        <li>تبحثون عن شريك يفهم طبيعة عملكم في المحاسبة والخدمات الاستشارية</li>
-        <li>تريدون بناء الأنظمة تدريجياً دون مخاطرة مالية عالية</li>
-        <li>تحتاجون إلى مرونة في تحديد الأولويات حسب متطلبات السوق</li>
-      </ul>
-    </div>
-    <div>
-      <div class="card" style="border-color: rgba(245, 166, 35, 0.25);">
-        <div style="font-size:32px; margin-bottom:16px; opacity:0.3;">❝</div>
-        <p style="font-size:19px; color:var(--white); line-height:1.9; font-weight:500;">
-          لا تحتاجون إلى مزوّد تقنية فحسب —<br>
-          بل إلى <span style="color:var(--teal); font-weight:700;">شريك تقني</span> يتحمّل المسؤولية معكم ويبني معكم خطوة بخطوة.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
-    <span>سرّي</span>
-  </div>
-</section>
-
-<!-- ============================================= -->
-<!-- SLIDE 4: THE CORE PROBLEM -->
-<!-- ============================================= -->
-<section class="slide">
-  <div class="glow-circle" style="width:400px;height:400px;background:var(--orange);top:-150px;left:50%;opacity:0.06;"></div>
-  <div class="slide-header">
-    <span class="slide-num">04</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
-  </div>
-
-  <div class="accent-line accent-line-orange"></div>
-  <h2 class="section-title">التحدي الحالي</h2>
-  <p class="section-subtitle">العوائق التي تواجه الشركات الصغيرة والمتوسطة عند محاولة بناء بنيتها التقنية</p>
+  <div class="accent accent-warm"></div>
+  <span class="slide-label">الشفافية</span>
+  <h2 class="slide-title">الجاهزية والثقة</h2>
+  <p class="slide-subtitle">نؤمن بأن الشفافية أساس أي شراكة ناجحة. نحن مستعدون لتقديم كل ما يثبت جديتنا وجاهزيتنا الكاملة.</p>
 
   <div class="grid-3" style="flex:1; align-content:start;">
-    <div class="card" style="border-right: 3px solid var(--orange); border-radius:16px;">
-      <h3 style="color:var(--orange);">التكلفة العالية</h3>
-      <p>بناء المشاريع التقنية بشكل منفصل يتطلب ميزانيات كبيرة مقدّماً، مع مخاطر عدم تحقيق العائد المتوقع.</p>
+    <div class="placeholder-item">
+      <strong>السجل التجاري</strong>
+      يُضاف هنا ملف السجل التجاري ووثائق تأسيس الشركة
     </div>
-    <div class="card" style="border-right: 3px solid var(--orange); border-radius:16px;">
-      <h3 style="color:var(--orange);">صعوبة التوظيف</h3>
-      <p>بناء فريق تقني داخلي يتطلب استثماراً كبيراً في الرواتب والإدارة والتدريب، وهو غير عملي للشركات الصغيرة.</p>
+    <div class="placeholder-item">
+      <strong>الموقع الإلكتروني</strong>
+      يُضاف هنا رابط الموقع الإلكتروني الرسمي للشركة
     </div>
-    <div class="card" style="border-right: 3px solid var(--orange); border-radius:16px;">
-      <h3 style="color:var(--orange);">التشتت والبطء</h3>
-      <p>غياب شريك تقني ثابت يؤدي إلى تشتت الجهود بين مزودين مختلفين وبطء في التنفيذ وفقدان الرؤية الشاملة.</p>
+    <div class="placeholder-item">
+      <strong>حسابات التواصل</strong>
+      يُضاف هنا روابط حسابات التواصل الاجتماعي الرسمية
+    </div>
+    <div class="placeholder-item">
+      <strong>العنوان والموقع</strong>
+      يُضاف هنا عنوان المكتب ورابط الموقع على خرائط Google
+    </div>
+    <div class="placeholder-item">
+      <strong>نماذج الأعمال السابقة</strong>
+      يُضاف هنا عرض لأبرز المشاريع والمنصات التي تم بناؤها
+    </div>
+    <div class="placeholder-item">
+      <strong>نماذج التصاميم</strong>
+      يُضاف هنا نماذج من التصاميم وواجهات المستخدم المُنجزة
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div style="text-align:center; margin-top:28px;">
+    <span class="badge badge-teal">جميع الوثائق والمراجع متاحة عند الطلب</span>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 5: PROPOSED MODEL -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 04 — PROJECT UNDERSTANDING                              -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">05</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+  <div class="slide-head">
+    <span class="slide-num">04</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">نموذج الشراكة المقترح</h2>
-  <p class="section-subtitle">شراكة تقنية شهرية مستمرة بدلاً من مشاريع منفصلة — نكون ذراعكم التقني الدائم</p>
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">رؤية المشروع</span>
+  <h2 class="slide-title">فهمنا لطبيعة المشروع</h2>
+  <p class="slide-subtitle">هذا ليس مجرد تطبيق توصيل أو متجر إلكتروني — بل منظومة رقمية متعددة الخدمات قابلة للتوسع المستمر.</p>
 
   <div class="two-col" style="flex:1;">
     <div>
-      <div style="margin-bottom:32px;">
-        <span class="badge badge-teal" style="margin-bottom:16px; display:inline-block;">النموذج الأساسي</span>
-        <h3 style="font-size:24px; margin-top:12px; margin-bottom:12px;">اشتراك شهري للشراكة التقنية</h3>
-        <p style="color:var(--gray); line-height:1.8; font-size:16px;">
-          بدلاً من التعاقد على مشاريع فردية بتكاليف مرتفعة، نعمل معكم كفريق تقني مستمر. يتم تحديد الأولويات شهرياً بالتنسيق معكم، ونقوم بالتنفيذ والتطوير والتحسين بشكل دوري.
-        </p>
-      </div>
-      <ul class="bullet-list">
-        <li>تنفيذ مستمر حسب الأولوية</li>
-        <li>تسليم تدريجي ومرن</li>
-        <li>استشارة تقنية وتوجيه مستمر</li>
-        <li>تطوير وتحسين لا ينتهي</li>
+      <ul class="bullets">
+        <li>منصة تجمع متاجر متعددة التصنيفات مع نظام طلب وتوصيل متكامل</li>
+        <li>إدارة عمليات التوصيل والمندوبين بكفاءة تشغيلية عالية</li>
+        <li>بوابة إدارة للتجار تمكّنهم من التحكم بمنتجاتهم وطلباتهم</li>
+        <li>خدمات مجتمعية مبتكرة مثل طلب الإسعاف والتبرع بالدم</li>
+        <li>بنية تقنية مصممة للتوسع التدريجي وإضافة خدمات مستقبلية</li>
       </ul>
     </div>
-    <div style="display:flex; flex-direction:column; gap:20px;">
-      <div class="card" style="text-align:center; padding:36px;">
-        <div style="font-size:14px; color:var(--teal); font-weight:700; margin-bottom:8px;">المشاريع التقليدية</div>
-        <div style="font-size:36px; font-weight:900; color:rgba(245,166,35,0.6); text-decoration:line-through;">مشروع ← تسليم ← انتهاء</div>
-      </div>
-      <div class="card" style="text-align:center; padding:36px; border-color:rgba(39,211,195,0.35);">
-        <div style="font-size:14px; color:var(--teal); font-weight:700; margin-bottom:8px;">نموذج قدرة</div>
-        <div style="font-size:28px; font-weight:900; color:var(--teal);">شراكة ← تطوير ← نمو ← استمرار</div>
+    <div>
+      <div class="card" style="border-color: rgba(242,166,90,0.2);">
+        <div style="font-size:28px; margin-bottom:14px; opacity:0.25;">❝</div>
+        <p style="font-size:18px; color:var(--white); line-height:1.9; font-weight:500;">
+          المشروع بطبيعته <span style="color:var(--teal); font-weight:700;">منتج رقمي متكامل</span> وليس تطبيقاً واحداً — يتطلب شريكاً تقنياً يفهم تعقيد المنظومة ويبنيها بشكل صحيح من الأساس.
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 6: WHAT THE PARTNERSHIP INCLUDES -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 05 — PRODUCT ECOSYSTEM                                  -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">06</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+  <div class="glow" style="width:450px;height:450px;background:var(--teal);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.04;"></div>
+  <div class="slide-head">
+    <span class="slide-num">05</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">ماذا تشمل الشراكة</h2>
-  <p class="section-subtitle">حزمة متكاملة من الخدمات التقنية تغطي دورة حياة المنتج الرقمي بالكامل</p>
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">الهندسة</span>
+  <h2 class="slide-title">المنظومة الرقمية المقترحة</h2>
+  <p class="slide-subtitle">خمسة مكونات مترابطة تُشكّل منظومة واحدة متكاملة — كل مكوّن يخدم طرفاً من أطراف المنصة</p>
+
+  <div class="eco-hub" style="flex:1; align-items:center;">
+    <!-- Right nodes -->
+    <div class="eco-ring">
+      <div class="eco-node" style="border-right:3px solid var(--teal);">
+        <div style="font-size:20px; margin-bottom:4px;">📱</div>
+        تطبيق المستخدم
+        <div style="font-size:11px; color:var(--gray); margin-top:4px;">تصفّح، طلب، تتبع، خدمات</div>
+      </div>
+      <div class="eco-node" style="border-right:3px solid var(--teal-light);">
+        <div style="font-size:20px; margin-bottom:4px;">🏪</div>
+        تطبيق التاجر
+        <div style="font-size:11px; color:var(--gray); margin-top:4px;">إدارة المنتجات والطلبات</div>
+      </div>
+      <div class="eco-node" style="border-right:3px solid var(--warm);">
+        <div style="font-size:20px; margin-bottom:4px;">🚗</div>
+        تطبيق المندوب
+        <div style="font-size:11px; color:var(--gray); margin-top:4px;">استلام وتوصيل الطلبات</div>
+      </div>
+    </div>
+
+    <div class="eco-connector"><span></span></div>
+
+    <!-- Center hub -->
+    <div class="eco-center">
+      <div style="font-size:13px; color:var(--teal); margin-bottom:6px;">المنصة</div>
+      <div>منظومة<br>متكاملة</div>
+    </div>
+
+    <div class="eco-connector" style="transform:scaleX(-1);"><span></span></div>
+
+    <!-- Left nodes -->
+    <div class="eco-ring">
+      <div class="eco-node" style="border-left:3px solid var(--teal);">
+        <div style="font-size:20px; margin-bottom:4px;">📊</div>
+        لوحة تحكم التاجر
+        <div style="font-size:11px; color:var(--gray); margin-top:4px;">إدارة شاملة عبر الويب</div>
+      </div>
+      <div class="eco-node" style="border-left:3px solid var(--warm);">
+        <div style="font-size:20px; margin-bottom:4px;">⚙</div>
+        لوحة تحكم الإدارة
+        <div style="font-size:11px; color:var(--gray); margin-top:4px;">تحكم كامل بالمنصة</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <span class="badge badge-teal">منظومة واحدة — تجربة متصلة لجميع الأطراف</span>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
+    <span>سرّي</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 06 — THE REAL CHALLENGE                                 -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);top:-120px;left:60%;opacity:0.05;"></div>
+  <div class="slide-head">
+    <span class="slide-num">06</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="accent accent-warm"></div>
+  <span class="slide-label">الواقع</span>
+  <h2 class="slide-title">التحدي الحقيقي</h2>
+  <p class="slide-subtitle">بناء منصة بهذا الحجم والتعقيد يتطلب نهجاً مختلفاً عن التعاقد التقليدي على المشاريع</p>
+
+  <div class="grid-2" style="flex:1; align-content:start; gap:28px;">
+    <div class="card" style="border-right:3px solid var(--warm);">
+      <h3 style="color:var(--warm);">التأسيس غير السليم مكلف</h3>
+      <p>البدء بدون بنية تقنية صحيحة يعني إعادة بناء كل شيء لاحقاً بتكلفة أعلى وجهد مضاعف.</p>
+    </div>
+    <div class="card" style="border-right:3px solid var(--warm);">
+      <h3 style="color:var(--warm);">التنفيذ المتفرق يُضعف الجودة</h3>
+      <p>التعامل مع مطورين مختلفين لكل جزء يخلق تشتتاً في الكود والتصميم ويصعّب الصيانة.</p>
+    </div>
+    <div class="card" style="border-right:3px solid var(--warm);">
+      <h3 style="color:var(--warm);">المنصات متعددة الأطراف معقدة</h3>
+      <p>إدارة مستخدمين وتجار ومندوبين وخدمات في منظومة واحدة تحتاج إدارة تقنية مستمرة ومتخصصة.</p>
+    </div>
+    <div class="card" style="border-right:3px solid var(--warm);">
+      <h3 style="color:var(--warm);">التطوير العشوائي يرفع التكلفة</h3>
+      <p>بدون تخطيط منتجي واضح، تتراكم الميزات غير المدروسة وتزيد التكلفة التشغيلية والفنية.</p>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
+    <span>سرّي</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 07 — PROPOSED MODEL                                     -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="slide-num">07</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">النموذج</span>
+  <h2 class="slide-title">نموذج الشراكة المقترح</h2>
+  <p class="slide-subtitle">شراكة تقنية شهرية مستمرة — نكون فريقكم التقني الدائم الذي يبني ويطوّر ويحسّن المنصة معكم</p>
+
+  <div class="two-col" style="flex:1;">
+    <div>
+      <div style="margin-bottom:28px;">
+        <span class="badge badge-teal" style="margin-bottom:14px; display:inline-block;">الفكرة الجوهرية</span>
+        <h3 style="font-size:22px; margin-top:10px; margin-bottom:12px;">بدلاً من مشروع ضخم مرة واحدة — نبني معكم شهراً بشهر</h3>
+        <p style="color:var(--gray); line-height:1.85; font-size:15px;">
+          يتم تحديد الأولويات شهرياً بالتنسيق معكم. نقوم بالتحليل، التصميم، التطوير، والاختبار بشكل مستمر — مع مراجعة دورية لضمان أن كل خطوة تخدم رؤيتكم.
+        </p>
+      </div>
+      <ul class="bullets">
+        <li>تطوير تدريجي حسب أولويات العمل</li>
+        <li>مراجعة وتحسين مستمر</li>
+        <li>مرونة في تعديل المسار</li>
+        <li>قابلية للتوسع مع نمو المنصة</li>
+      </ul>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:18px;">
+      <div class="card card-sm" style="text-align:center;">
+        <div style="font-size:13px; color:var(--warm); font-weight:700; margin-bottom:6px;">النهج التقليدي</div>
+        <div style="font-size:24px; font-weight:800; color:rgba(242,166,90,0.45); text-decoration:line-through;">مشروع ← تسليم ← نهاية</div>
+      </div>
+      <div class="card card-sm" style="text-align:center; border-color:var(--border-teal);">
+        <div style="font-size:13px; color:var(--teal); font-weight:700; margin-bottom:6px;">نموذج الشراكة</div>
+        <div style="font-size:22px; font-weight:800; color:var(--teal);">شراكة ← بناء ← تطور ← نمو ← استمرار</div>
+      </div>
+      <div class="card card-sm" style="background:rgba(31,200,192,0.04); border-color:rgba(31,200,192,0.15);">
+        <p style="font-size:15px; color:var(--white); text-align:center; font-weight:600; line-height:1.8;">
+          نتحمّل المسؤولية التقنية الكاملة —<br>وأنتم تركّزون على تنمية أعمالكم.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
+    <span>سرّي</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 08 — PARTNERSHIP SCOPE                                  -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="slide-num">08</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">النطاق</span>
+  <h2 class="slide-title">ماذا تشمل الشراكة</h2>
+  <p class="slide-subtitle">حزمة متكاملة من الخدمات التقنية تغطي دورة حياة المنتج الرقمي بالكامل</p>
 
   <div class="grid-4" style="flex:1; align-content:start;">
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-teal" style="width:40px;height:40px;font-size:18px;">◎</div>
-      <h3 style="font-size:16px;">تحليل الأنظمة</h3>
-      <p style="font-size:13px;">دراسة وتحليل متطلبات العمل وترجمتها إلى حلول تقنية واضحة.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-teal" style="width:38px;height:38px;font-size:16px;">◎</div>
+      <h3 style="font-size:15px;">تحليل المتطلبات</h3>
+      <p style="font-size:12px;">فهم احتياجات العمل وترجمتها إلى مواصفات تقنية دقيقة.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-green" style="width:40px;height:40px;font-size:18px;">◈</div>
-      <h3 style="font-size:16px;">تخطيط المنتج</h3>
-      <p style="font-size:13px;">وضع خارطة طريق المنتج وتحديد الأولويات بما يخدم الأهداف التجارية.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-green" style="width:38px;height:38px;font-size:16px;">◈</div>
+      <h3 style="font-size:15px;">تخطيط المنتج</h3>
+      <p style="font-size:12px;">خارطة طريق واضحة وأولويات مرتبة حسب القيمة التجارية.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-orange" style="width:40px;height:40px;font-size:18px;">⬡</div>
-      <h3 style="font-size:16px;">تصميم الواجهات</h3>
-      <p style="font-size:13px;">تصميم تجربة مستخدم احترافية وواجهات عمل سهلة الاستخدام.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-warm" style="width:38px;height:38px;font-size:16px;">⬡</div>
+      <h3 style="font-size:15px;">تصميم التجربة</h3>
+      <p style="font-size:12px;">واجهات احترافية وتجربة مستخدم مدروسة لكل طرف.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-teal" style="width:40px;height:40px;font-size:18px;">⟐</div>
-      <h3 style="font-size:16px;">تطوير الأنظمة</h3>
-      <p style="font-size:13px;">بناء وتطوير الأنظمة والمنصات الرقمية بأحدث التقنيات.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-teal" style="width:38px;height:38px;font-size:16px;">📱</div>
+      <h3 style="font-size:15px;">تطبيقات الجوال</h3>
+      <p style="font-size:12px;">تطوير تطبيقات المستخدم والتاجر والمندوب.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-green" style="width:40px;height:40px;font-size:18px;">⊞</div>
-      <h3 style="font-size:16px;">وحدات ERP</h3>
-      <p style="font-size:13px;">تطوير وحدات نظام ERP تدريجياً حسب أولويات العمل.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-green" style="width:38px;height:38px;font-size:16px;">⊞</div>
+      <h3 style="font-size:15px;">لوحات التحكم</h3>
+      <p style="font-size:12px;">بناء لوحات إدارة شاملة للتاجر والإدارة العامة.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-orange" style="width:40px;height:40px;font-size:18px;">⟡</div>
-      <h3 style="font-size:16px;">الدعم التقني</h3>
-      <p style="font-size:13px;">دعم فني مستمر وصيانة دورية لضمان استقرار الأنظمة.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-warm" style="width:38px;height:38px;font-size:16px;">⟐</div>
+      <h3 style="font-size:15px;">بناء تدريجي</h3>
+      <p style="font-size:12px;">إضافة الخصائص والوحدات بشكل مرحلي ومنظم.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-teal" style="width:40px;height:40px;font-size:18px;">↻</div>
-      <h3 style="font-size:16px;">التحسين المستمر</h3>
-      <p style="font-size:13px;">تطوير وتحسين الأنظمة باستمرار بناءً على ملاحظات الاستخدام الفعلي.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-teal" style="width:38px;height:38px;font-size:16px;">↻</div>
+      <h3 style="font-size:15px;">الاستقرار الفني</h3>
+      <p style="font-size:12px;">اختبار وتحسين مستمر لضمان جودة واستقرار المنصة.</p>
     </div>
-    <div class="card" style="padding:24px;">
-      <div class="card-icon icon-green" style="width:40px;height:40px;font-size:18px;">☰</div>
-      <h3 style="font-size:16px;">الاستشارة التقنية</h3>
-      <p style="font-size:13px;">توجيه تقني استراتيجي لاتخاذ قرارات تقنية سليمة وفعّالة.</p>
+    <div class="card card-sm">
+      <div class="card-icon ic-green" style="width:38px;height:38px;font-size:16px;">⟡</div>
+      <h3 style="font-size:15px;">الدعم المستمر</h3>
+      <p style="font-size:12px;">دعم تقني وتطوير مستمر طوال مدة الشراكة.</p>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 7: WHY THIS MODEL WORKS -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 09 — WHY THIS MODEL FITS                                -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">07</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
-  </div>
-
-  <div class="accent-line"></div>
-  <h2 class="section-title">لماذا هذا النموذج مناسب</h2>
-  <p class="section-subtitle">مقارنة بين نموذج الشراكة المستمرة والبدائل التقليدية</p>
-
-  <div class="grid-2" style="flex:1; align-content:start; gap:40px;">
-    <div>
-      <h3 style="font-size:20px; margin-bottom:24px; color:var(--teal);">✦ مزايا نموذج الشراكة</h3>
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div class="card" style="padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="min-width:44px;height:44px;border-radius:10px;background:rgba(39,211,195,0.12);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:800;font-size:18px;">↓</div>
-          <div><h4 style="font-size:16px; margin-bottom:4px;">مخاطر مالية أقل</h4><p style="font-size:13px; color:var(--gray);">لا حاجة لاستثمار مبالغ كبيرة مقدّماً</p></div>
-        </div>
-        <div class="card" style="padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="min-width:44px;height:44px;border-radius:10px;background:rgba(126,217,87,0.12);display:flex;align-items:center;justify-content:center;color:var(--green);font-weight:800;font-size:18px;">⚡</div>
-          <div><h4 style="font-size:16px; margin-bottom:4px;">تنفيذ أسرع</h4><p style="font-size:13px; color:var(--gray);">البدء فوراً دون مراحل تفاوض طويلة</p></div>
-        </div>
-        <div class="card" style="padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="min-width:44px;height:44px;border-radius:10px;background:rgba(245,166,35,0.12);display:flex;align-items:center;justify-content:center;color:var(--orange);font-weight:800;font-size:18px;">⇌</div>
-          <div><h4 style="font-size:16px; margin-bottom:4px;">مرونة في الأولويات</h4><p style="font-size:13px; color:var(--gray);">تعديل خطة العمل شهرياً حسب المستجدات</p></div>
-        </div>
-        <div class="card" style="padding:20px; display:flex; align-items:center; gap:16px;">
-          <div style="min-width:44px;height:44px;border-radius:10px;background:rgba(39,211,195,0.12);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:800;font-size:18px;">∞</div>
-          <div><h4 style="font-size:16px; margin-bottom:4px;">نمو مستدام</h4><p style="font-size:13px; color:var(--gray);">تطور مستمر للأنظمة مع نمو الأعمال</p></div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:20px; margin-bottom:24px; color:rgba(245,166,35,0.7);">✕ تحديات البدائل</h3>
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div class="card" style="padding:20px; opacity:0.65;">
-          <h4 style="font-size:16px; margin-bottom:4px;">مشاريع مستقلة</h4>
-          <p style="font-size:13px; color:var(--gray);">تكاليف عالية، نتائج غير مضمونة، وتوقف الدعم بعد التسليم</p>
-        </div>
-        <div class="card" style="padding:20px; opacity:0.65;">
-          <h4 style="font-size:16px; margin-bottom:4px;">فريق داخلي</h4>
-          <p style="font-size:13px; color:var(--gray);">رواتب مرتفعة، صعوبة الاستقطاب، وعبء إداري إضافي</p>
-        </div>
-        <div class="card" style="padding:20px; opacity:0.65;">
-          <h4 style="font-size:16px; margin-bottom:4px;">حلول جاهزة</h4>
-          <p style="font-size:13px; color:var(--gray);">لا تناسب طبيعة عملكم ومحدودة التخصيص والتطوير</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
-    <span>سرّي</span>
-  </div>
-</section>
-
-<!-- ============================================= -->
-<!-- SLIDE 8: ERP VISION -->
-<!-- ============================================= -->
-<section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">08</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
-  </div>
-
-  <div class="accent-line"></div>
-  <h2 class="section-title">الرؤية الأولية لنظام ERP</h2>
-  <p class="section-subtitle">وحدات النظام تُبنى تدريجياً حسب الأولوية — كل وحدة مرحلة مستقلة قابلة للتشغيل</p>
-
-  <div class="erp-grid" style="flex:1; align-content:start;">
-    <div class="erp-module">
-      <div class="erp-icon icon-teal">🏢</div>
-      <h4>الشركات والفروع</h4>
-      <p>هيكل تنظيمي متعدد</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-green">👥</div>
-      <h4>المستخدمون</h4>
-      <p>صلاحيات وأدوار</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-orange">📋</div>
-      <h4>جهات الاتصال</h4>
-      <p>عملاء وموردون</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-teal">💰</div>
-      <h4>المبيعات</h4>
-      <p>عروض وفواتير</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-green">🛒</div>
-      <h4>المشتريات</h4>
-      <p>أوامر شراء وتوريد</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-orange">📦</div>
-      <h4>المخزون</h4>
-      <p>إدارة المواد والأصناف</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-teal">💳</div>
-      <h4>المصروفات</h4>
-      <p>تتبع وتصنيف المصاريف</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-green">📊</div>
-      <h4>المحاسبة</h4>
-      <p>قيود وميزان مراجعة</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-orange">📈</div>
-      <h4>التقارير</h4>
-      <p>تقارير مالية وتشغيلية</p>
-    </div>
-    <div class="erp-module">
-      <div class="erp-icon icon-teal">⚙</div>
-      <h4>الإعدادات</h4>
-      <p>تخصيص النظام والضبط</p>
-    </div>
-  </div>
-
-  <div style="text-align:center; margin-top:24px;">
-    <span class="badge badge-teal">يتم بناء كل وحدة كمرحلة مستقلة — لا نعد بتسليم كل شيء دفعة واحدة</span>
-  </div>
-
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
-    <span>سرّي</span>
-  </div>
-</section>
-
-<!-- ============================================= -->
-<!-- SLIDE 9: DELIVERY METHODOLOGY -->
-<!-- ============================================= -->
-<section class="slide">
-  <div class="slide-header">
+  <div class="slide-head">
     <span class="slide-num">09</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">آلية العمل</h2>
-  <p class="section-subtitle">منهجية منظّمة تضمن الشفافية والتحكم في كل خطوة من خطوات التنفيذ</p>
+  <div class="accent accent-mix"></div>
+  <span class="slide-label">المنطق</span>
+  <h2 class="slide-title">لماذا هذا النموذج هو الأنسب</h2>
+  <p class="slide-subtitle">مقارنة واقعية بين نموذج الشراكة المستمرة والبدائل التقليدية في بناء منصات بهذا الحجم</p>
 
-  <div class="steps" style="flex:1; align-content:start;">
-    <div class="step-item">
-      <h4>التخطيط الشهري</h4>
-      <p>في بداية كل شهر، نجلس معكم لتحديد الأولويات والمهام المطلوب تنفيذها بناءً على احتياجات العمل الفعلية.</p>
+  <div class="two-col" style="flex:1;">
+    <div>
+      <h3 style="font-size:18px; margin-bottom:22px; color:var(--teal);">✦ مزايا الشراكة الشهرية</h3>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+          <div style="min-width:40px;height:40px;border-radius:8px;background:rgba(31,200,192,0.1);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:800;font-size:16px;">↓</div>
+          <div><h4 style="font-size:15px; margin-bottom:3px;">ضغط مالي أقل</h4><p style="font-size:12px; color:var(--gray);">لا حاجة لميزانية ضخمة مقدّماً</p></div>
+        </div>
+        <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+          <div style="min-width:40px;height:40px;border-radius:8px;background:rgba(107,227,199,0.1);display:flex;align-items:center;justify-content:center;color:var(--teal-light);font-weight:800;font-size:16px;">⚡</div>
+          <div><h4 style="font-size:15px; margin-bottom:3px;">بناء ذكي وتدريجي</h4><p style="font-size:12px; color:var(--gray);">أولويات واضحة وتنفيذ عملي</p></div>
+        </div>
+        <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+          <div style="min-width:40px;height:40px;border-radius:8px;background:rgba(242,166,90,0.1);display:flex;align-items:center;justify-content:center;color:var(--warm);font-weight:800;font-size:16px;">⇌</div>
+          <div><h4 style="font-size:15px; margin-bottom:3px;">مرونة في التوجيه</h4><p style="font-size:12px; color:var(--gray);">تعديل الأولويات حسب المستجدات</p></div>
+        </div>
+        <div class="card card-sm" style="display:flex; align-items:center; gap:14px;">
+          <div style="min-width:40px;height:40px;border-radius:8px;background:rgba(31,200,192,0.1);display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:800;font-size:16px;">◎</div>
+          <div><h4 style="font-size:15px; margin-bottom:3px;">استمرارية ومسؤولية</h4><p style="font-size:12px; color:var(--gray);">فريق ثابت يعرف المنتج من الداخل</p></div>
+        </div>
+      </div>
     </div>
-    <div class="step-item">
-      <h4>مواءمة الأولويات</h4>
-      <p>نتفق على ترتيب المهام حسب الأثر التجاري والجاهزية التقنية، مما يضمن أن العمل يخدم أهدافكم أولاً.</p>
-    </div>
-    <div class="step-item">
-      <h4>التنفيذ التدريجي</h4>
-      <p>نقوم بالتنفيذ على دفعات قابلة للقياس والتقييم، مع تسليمات واضحة يمكنكم معاينتها واستخدامها فوراً.</p>
-    </div>
-    <div class="step-item">
-      <h4>المراجعة المستمرة</h4>
-      <p>نراجع ما تم إنجازه بشكل دوري، نستمع لملاحظاتكم، ونُعدّل المسار لضمان تحقيق أفضل النتائج.</p>
-    </div>
-    <div class="step-item">
-      <h4>تسليم قيمة فعلية</h4>
-      <p>كل شهر يُنتج مُخرجات حقيقية يمكنكم استخدامها — وليس وعوداً أو تقارير نظرية.</p>
+    <div>
+      <h3 style="font-size:18px; margin-bottom:22px; color:rgba(242,166,90,0.65);">✕ مشاكل النهج التقليدي</h3>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div class="card card-sm" style="opacity:0.6;">
+          <h4 style="font-size:15px; margin-bottom:3px;">مشروع كبير مقدّماً</h4>
+          <p style="font-size:12px; color:var(--gray);">مبلغ ضخم بدون ضمان أن النتيجة ستطابق التوقعات</p>
+        </div>
+        <div class="card card-sm" style="opacity:0.6;">
+          <h4 style="font-size:15px; margin-bottom:3px;">تسليم ثم اختفاء</h4>
+          <p style="font-size:12px; color:var(--gray);">المزوّد ينتهي بالتسليم ولا يوجد دعم مستمر حقيقي</p>
+        </div>
+        <div class="card card-sm" style="opacity:0.6;">
+          <h4 style="font-size:15px; margin-bottom:3px;">صعوبة التعديل</h4>
+          <p style="font-size:12px; color:var(--gray);">أي تغيير يحتاج تفاوض جديد وتكلفة إضافية</p>
+        </div>
+        <div class="card card-sm" style="opacity:0.6;">
+          <h4 style="font-size:15px; margin-bottom:3px;">هدر قبل التحقق</h4>
+          <p style="font-size:12px; color:var(--gray);">بناء كل شيء دفعة واحدة قبل التأكد من صحة الفرضيات</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 10: COMMERCIAL MODEL -->
-<!-- ============================================= -->
-<section class="slide" style="justify-content:center;">
-  <div class="slide-header">
+<!-- ============================================================ -->
+<!-- SLIDE 10 — INITIAL FEATURE VISION                             -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="slide-head">
     <span class="slide-num">10</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">الخصائص</span>
+  <h2 class="slide-title">الرؤية الأولية للخصائص</h2>
+  <p class="slide-subtitle">وحدات ومكونات المنصة — تُبنى تدريجياً حسب الأولوية، كل وحدة مرحلة مستقلة قابلة للتشغيل</p>
+
+  <div class="mod-grid" style="flex:1; align-content:start;">
+    <div class="mod-tile">
+      <div class="mod-icon ic-teal">🏪</div>
+      <h4>إدارة المتاجر</h4>
+      <p>تسجيل وتصنيف التجار</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-green">📦</div>
+      <h4>الكتالوج والمنتجات</h4>
+      <p>إدارة الأصناف والأسعار</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-warm">🛒</div>
+      <h4>الطلبات والدفع</h4>
+      <p>سلة الشراء والمعاملات</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-teal">🚚</div>
+      <h4>التوصيل والتتبع</h4>
+      <p>تتبع لحظي للطلبات</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-green">👤</div>
+      <h4>إدارة المندوبين</h4>
+      <p>تعيين وتوزيع المهام</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-warm">🔔</div>
+      <h4>التنبيهات</h4>
+      <p>إشعارات فورية لجميع الأطراف</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-teal" style="background:rgba(31,200,192,0.18);">🚑</div>
+      <h4>الإسعاف الفوري</h4>
+      <p>طلب خدمة إسعاف من التطبيق</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-warm" style="background:rgba(242,166,90,0.18);">🩸</div>
+      <h4>التبرع بالدم</h4>
+      <p>ربط المتبرعين بالمحتاجين</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-green">🗺</div>
+      <h4>المناطق والتغطية</h4>
+      <p>إدارة نطاق الخدمة</p>
+    </div>
+    <div class="mod-tile">
+      <div class="mod-icon ic-teal">📊</div>
+      <h4>التقارير والمتابعة</h4>
+      <p>لوحات بيانات تحليلية</p>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <span class="badge badge-warm">وحدات قابلة للتوسع — يتم بناء كل وحدة كمرحلة مستقلة حسب الأولوية</span>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
+    <span>سرّي</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 — WORKING APPROACH                                   -->
+<!-- ============================================================ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="slide-num">11</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">المنهجية</span>
+  <h2 class="slide-title">آلية العمل والتنفيذ</h2>
+  <p class="slide-subtitle">دورة عمل واضحة ومنظّمة تضمن الشفافية والتحكم في كل مرحلة</p>
+
+  <div class="flow" style="flex:1; align-content:start;">
+    <div class="flow-item">
+      <h4>فهم المرحلة</h4>
+      <p>تحليل الوضع الحالي وتحديد المتطلبات القادمة بالتنسيق معكم.</p>
+    </div>
+    <div class="flow-item">
+      <h4>ترتيب الأولويات</h4>
+      <p>تحديد ما يجب بناؤه أولاً بناءً على الأثر التجاري والجاهزية التقنية.</p>
+    </div>
+    <div class="flow-item">
+      <h4>تصميم المسار</h4>
+      <p>تجهيز التصاميم والمواصفات الفنية قبل الدخول في التطوير.</p>
+    </div>
+    <div class="flow-item">
+      <h4>تنفيذ تدريجي</h4>
+      <p>بناء الخصائص على دفعات قابلة للقياس مع تسليمات واضحة.</p>
+    </div>
+    <div class="flow-item">
+      <h4>اختبار وتحسين</h4>
+      <p>مراجعة النتائج، اختبار الجودة، وتحسين الأداء قبل الانتقال.</p>
+    </div>
+    <div class="flow-item">
+      <h4>المرحلة التالية</h4>
+      <p>الانتقال للأولوية القادمة مع الحفاظ على استقرار ما تم بناؤه.</p>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
+    <span>سرّي</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 — COMMERCIAL MODEL                                   -->
+<!-- ============================================================ -->
+<section class="slide" style="justify-content:center;">
+  <div class="glow" style="width:500px;height:500px;background:var(--teal);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.04;"></div>
+  <div class="slide-head">
+    <span class="slide-num">12</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
   <div style="text-align:center;">
-    <div class="accent-line" style="margin:0 auto 24px;"></div>
-    <h2 class="section-title" style="text-align:center;">النموذج المالي</h2>
-    <p class="section-subtitle" style="text-align:center; margin:0 auto 50px; max-width:700px;">رسم شراكة شهري واضح وثابت — يشمل التنفيذ والاستشارة والتطوير المستمر</p>
+    <div class="accent accent-teal" style="margin:0 auto 22px;"></div>
+    <span class="slide-label">الاستثمار</span>
+    <h2 class="slide-title" style="text-align:center;">النموذج المالي</h2>
+    <p class="slide-subtitle" style="text-align:center; margin:0 auto 44px; max-width:720px;">رسم شراكة شهري واضح وثابت — يغطي التنفيذ التقني والاستشارة والتطوير والتحسين المستمر</p>
   </div>
 
-  <div class="price-box">
+  <div class="price-panel">
     <div style="margin-bottom:8px;">
-      <span class="badge badge-teal">رسم الشراكة الشهري</span>
+      <span class="badge badge-teal">رسم الشراكة التقنية الشهري</span>
     </div>
-    <div class="price-amount">10,000</div>
-    <div class="price-unit">ريال سعودي / شهرياً</div>
-    <div style="margin-top:28px; border-top:1px solid rgba(39,211,195,0.15); padding-top:24px;">
-      <p style="font-size:16px; color:var(--gray); line-height:1.8; max-width:450px; margin:0 auto;">
-        يشمل الرسم: التنفيذ التقني، الاستشارة، التصميم، التطوير، الدعم، والتحسين المستمر.<br>
-        يتم الاتفاق على أولويات التنفيذ شهرياً حسب احتياجات العمل.
+    <div class="price-val">700</div>
+    <div class="price-unit">دولار أمريكي / شهرياً</div>
+    <div style="margin-top:28px; border-top:1px solid rgba(31,200,192,0.12); padding-top:22px;">
+      <p style="font-size:15px; color:var(--gray); line-height:1.85; max-width:460px; margin:0 auto;">
+        يشمل: التحليل، التصميم، التطوير، الاختبار، الدعم الفني، والتحسين المستمر.<br>
+        يتم الاتفاق على أولويات التنفيذ شهرياً بما يخدم أهداف المنصة.
       </p>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div style="text-align:center; margin-top:28px;">
+    <span class="badge badge-warm">مسار عملي — تكلفة واضحة — مخاطر منخفضة — نتائج تراكمية</span>
+  </div>
+
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 11: WHY CHOOSE US -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 13 — WHY US                                             -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">11</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+  <div class="slide-head">
+    <span class="slide-num">13</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">لماذا نحن</h2>
-  <p class="section-subtitle">ما يميّز قدرة كشريك تقني استراتيجي لأعمالكم</p>
+  <div class="accent accent-teal"></div>
+  <span class="slide-label">الشريك</span>
+  <h2 class="slide-title">لماذا نحن</h2>
+  <p class="slide-subtitle">ما يميّزنا كشريك تقني مناسب لبناء هذه المنصة</p>
 
   <div class="grid-3" style="flex:1; align-content:start;">
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,211,195,0.15),rgba(126,217,87,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">⟐</div>
-      <h3 style="margin-bottom:10px;">عقلية الشراكة</h3>
-      <p>لا نعمل كمزوّد خدمة عابر — نتعامل مع أعمالكم وكأنها أعمالنا، ونتحمّل المسؤولية التقنية الكاملة.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(31,200,192,0.12),rgba(107,227,199,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">⟐</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">شراكة حقيقية</h3>
+      <p>لا نعمل كمنفّذ مؤقت — نتعامل مع مشروعكم كمنتج نملك مسؤوليته التقنية الكاملة.</p>
     </div>
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(126,217,87,0.15),rgba(39,211,195,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">◈</div>
-      <h3 style="margin-bottom:10px;">تفكير منتجي</h3>
-      <p>نبني أنظمتكم كمنتجات رقمية حقيقية — بتصميم مدروس وبنية قابلة للنمو والتطور.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(107,227,199,0.12),rgba(31,200,192,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">◈</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">فهم تقني ومنتجي</h3>
+      <p>نفهم الفرق بين كتابة كود وبناء منتج — نفكّر في تجربة المستخدم والأعمال قبل التقنية.</p>
     </div>
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(245,166,35,0.15),rgba(39,211,195,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">⚙</div>
-      <h3 style="margin-bottom:10px;">تنفيذ احترافي</h3>
-      <p>فريق متمرّس في بناء أنظمة ERP والمنصات الرقمية بمعايير هندسية عالية.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(242,166,90,0.12),rgba(31,200,192,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">⊞</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">منصات متعددة الأطراف</h3>
+      <p>لدينا خبرة في بناء منظومات تضم مستخدمين وتجار ومندوبين وإدارة في بيئة واحدة.</p>
     </div>
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,211,195,0.15),rgba(245,166,35,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">⊞</div>
-      <h3 style="margin-bottom:10px;">فهم الأعمال</h3>
-      <p>نفهم طبيعة السوق السعودي ومتطلبات الشركات المحاسبية والاستشارية.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(31,200,192,0.12),rgba(242,166,90,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">⇌</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">مرونة في التطوير</h3>
+      <p>قادرون على التكيّف مع تغيّر الأولويات وتطور رؤية المنتج مع الوقت.</p>
     </div>
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(126,217,87,0.15),rgba(245,166,35,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">↻</div>
-      <h3 style="margin-bottom:10px;">دعم مستمر</h3>
-      <p>لا نختفي بعد التسليم — نبقى معكم نطوّر ونحسّن ونضيف قيمة جديدة كل شهر.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(107,227,199,0.12),rgba(242,166,90,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">↻</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">استمرارية ودعم</h3>
+      <p>لا نختفي بعد التسليم — نبقى معكم نطوّر ونحسّن ونضيف قيمة كل شهر.</p>
     </div>
-    <div class="card" style="text-align:center; padding:36px 28px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(39,211,195,0.15),rgba(126,217,87,0.1));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">◎</div>
-      <h3 style="margin-bottom:10px;">ملكية تقنية</h3>
-      <p>جميع الأنظمة التي نبنيها تبقى ملكاً لكم بالكامل — شفافية كاملة في كل شيء.</p>
+    <div class="card" style="text-align:center; padding:34px 26px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(31,200,192,0.12),rgba(107,227,199,0.06));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;">◎</div>
+      <h3 style="margin-bottom:8px; font-size:17px;">تنفيذ منظّم</h3>
+      <p>منهجية عمل واضحة، تسليمات محددة، ومراجعة دورية — لا عمل عشوائي.</p>
     </div>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 12: ROADMAP -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 14 — ROADMAP                                            -->
+<!-- ============================================================ -->
 <section class="slide">
-  <div class="slide-header">
-    <span class="slide-num">12</span>
-    <img src="./logo.png" alt="قدرة" class="slide-logo" onerror="this.style.display='none'">
+  <div class="slide-head">
+    <span class="slide-num">14</span>
+    <img src="./logo.png" alt="" class="slide-logo" onerror="this.style.display='none'">
   </div>
 
-  <div class="accent-line"></div>
-  <h2 class="section-title">خارطة طريق مبدئية</h2>
-  <p class="section-subtitle">رؤية تدريجية للتنفيذ — المراحل مرنة وقابلة للتعديل حسب أولوياتكم</p>
+  <div class="accent accent-mix"></div>
+  <span class="slide-label">المسار</span>
+  <h2 class="slide-title">خارطة طريق مبدئية</h2>
+  <p class="slide-subtitle">رؤية تدريجية لمراحل بناء المنصة — المراحل مرنة وقابلة للتعديل حسب أولوياتكم</p>
 
-  <div class="timeline" style="margin-top:20px;">
-    <div class="timeline-item">
-      <div class="timeline-phase">المرحلة الأولى</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-title">الاكتشاف والتأسيس</div>
-      <div class="timeline-desc">
-        تحليل الاحتياجات، توثيق المتطلبات، بناء البنية التحتية الأساسية، وتأسيس الهيكل التنظيمي للنظام.
-      </div>
+  <div class="timeline" style="margin-top:16px;">
+    <div class="tl-item">
+      <div class="tl-phase">المرحلة الأولى</div>
+      <div class="tl-dot"></div>
+      <div class="tl-title">الاكتشاف والتأسيس</div>
+      <div class="tl-desc">تحليل شامل للمتطلبات، تصميم بنية النظام، تأسيس البيئة التقنية، وتجهيز الهيكل الأساسي للمنصة.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">المرحلة الثانية</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-title">الوحدات الأساسية</div>
-      <div class="timeline-desc">
-        تطوير وحدات ERP الأولية: إدارة جهات الاتصال، المبيعات، المشتريات، وإدارة المستخدمين والصلاحيات.
-      </div>
+    <div class="tl-item">
+      <div class="tl-phase">المرحلة الثانية</div>
+      <div class="tl-dot"></div>
+      <div class="tl-title">إطلاق النواة الأساسية</div>
+      <div class="tl-desc">تطوير تطبيق المستخدم الأساسي، نظام المتاجر والكتالوج، الطلبات والدفع، ولوحة الإدارة الأولية.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">المرحلة الثالثة</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-title">المحاسبة والعمليات</div>
-      <div class="timeline-desc">
-        بناء الوحدات المتقدمة: المحاسبة، المخزون، المصروفات، التقارير المالية والتشغيلية.
-      </div>
+    <div class="tl-item">
+      <div class="tl-phase">المرحلة الثالثة</div>
+      <div class="tl-dot"></div>
+      <div class="tl-title">التوسع في الخدمات</div>
+      <div class="tl-desc">إضافة تطبيق المندوب، نظام التوصيل والتتبع، الخدمات المجتمعية، ولوحة تحكم التاجر الشاملة.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">المرحلة الرابعة</div>
-      <div class="timeline-dot"></div>
-      <div class="timeline-title">التحسين والتوسع</div>
-      <div class="timeline-desc">
-        تحسين الأداء، إضافة ميزات متقدمة، توسيع النظام حسب نمو الأعمال، وتكامل مع أنظمة خارجية.
-      </div>
+    <div class="tl-item">
+      <div class="tl-phase">المرحلة الرابعة</div>
+      <div class="tl-dot"></div>
+      <div class="tl-title">التحسين والنمو</div>
+      <div class="tl-desc">تحسين الأداء، التقارير المتقدمة، التكامل مع أنظمة خارجية، وتوسيع المنصة حسب نمو الأعمال.</div>
     </div>
   </div>
 
-  <div style="text-align:center; margin-top:40px;">
-    <span class="badge badge-orange">المراحل مرنة ويتم تعديلها حسب أولويات العمل الفعلية</span>
+  <div style="text-align:center; margin-top:36px;">
+    <span class="badge badge-warm">المراحل مرنة — يتم تعديلها حسب أولويات العمل الفعلية ونتائج كل مرحلة</span>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>سرّي</span>
   </div>
 </section>
 
-<!-- ============================================= -->
-<!-- SLIDE 13: CLOSING -->
-<!-- ============================================= -->
+<!-- ============================================================ -->
+<!-- SLIDE 15 — NEXT STEP / CLOSING                                -->
+<!-- ============================================================ -->
 <section class="slide cta-slide">
-  <div class="glow-circle" style="width:600px;height:600px;background:var(--teal);top:-200px;right:-200px;opacity:0.08;"></div>
-  <div class="glow-circle" style="width:400px;height:400px;background:var(--green);bottom:-150px;left:-100px;opacity:0.06;"></div>
+  <div class="glow" style="width:600px;height:600px;background:var(--teal);top:-180px;right:-180px;opacity:0.06;"></div>
+  <div class="glow" style="width:400px;height:400px;background:var(--warm);bottom:-120px;left:-100px;opacity:0.04;"></div>
 
-  <img src="./logo.png" alt="قدرة" style="height:120px; margin-bottom:40px; filter:drop-shadow(0 0 30px rgba(39,211,195,0.15));" onerror="this.style.display='none'">
+  <img src="./logo.png" alt="" style="height:80px; margin-bottom:36px; filter:drop-shadow(0 0 40px rgba(31,200,192,0.12));" onerror="this.style.display='none'">
 
-  <h2 class="section-title" style="font-size:44px; margin-bottom:16px;">الخطوة التالية</h2>
-  <div class="accent-line" style="margin:0 auto 28px;"></div>
-  
-  <p style="font-size:21px; color:var(--gray); line-height:1.9; max-width:700px; margin:0 auto 50px;">
-    نحن مستعدون لبدء الشراكة — الخطوة التالية هي الجلوس معاً<br>
-    لتحديد الأولويات وتعريف المرحلة الأولى والانطلاق في التنفيذ.
+  <h2 class="slide-title" style="font-size:42px; margin-bottom:14px;">الخطوة التالية</h2>
+  <div class="accent accent-teal" style="margin:0 auto 28px;"></div>
+
+  <p style="font-size:20px; color:var(--gray); line-height:1.9; max-width:700px; margin:0 auto 44px;">
+    نحن مستعدون للانطلاق — الخطوة القادمة هي استكمال التعارف<br>
+    ومواءمة الأولويات لنبدأ الشراكة ببناء المرحلة الأولى من المنصة.
   </p>
 
-  <div class="steps" style="max-width:900px; margin:0 auto;">
-    <div class="step-item" style="text-align:center;">
-      <h4>بدء الشراكة</h4>
-      <p>توقيع اتفاقية الشراكة التقنية الشهرية</p>
+  <div class="flow" style="max-width:1000px; margin:0 auto 44px;">
+    <div class="flow-item" style="text-align:center;">
+      <h4>استكمال المعلومات</h4>
+      <p>تبادل الوثائق التعريفية والتأكد من الجاهزية المتبادلة</p>
     </div>
-    <div class="step-item" style="text-align:center;">
+    <div class="flow-item" style="text-align:center;">
       <h4>مواءمة الأولويات</h4>
-      <p>تحديد المتطلبات الأكثر إلحاحاً</p>
+      <p>تحديد المتطلبات الأكثر إلحاحاً للمرحلة الأولى</p>
     </div>
-    <div class="step-item" style="text-align:center;">
-      <h4>تعريف المرحلة الأولى</h4>
-      <p>وضع خطة عمل واضحة للشهر الأول</p>
+    <div class="flow-item" style="text-align:center;">
+      <h4>تحديد الانطلاقة</h4>
+      <p>الاتفاق على خطة العمل الأولى وبدء الشراكة رسمياً</p>
     </div>
-    <div class="step-item" style="text-align:center;">
-      <h4>الانطلاق</h4>
-      <p>بدء التنفيذ الفعلي وتحقيق أول النتائج</p>
+    <div class="flow-item" style="text-align:center;">
+      <h4>التنفيذ المرحلي</h4>
+      <p>البدء الفعلي في بناء أول مكونات المنصة</p>
     </div>
   </div>
 
-  <div style="margin-top:50px; padding:30px 40px; border:1px solid rgba(39,211,195,0.2); border-radius:16px; background:rgba(39,211,195,0.04); max-width:600px;">
-    <p style="font-size:19px; font-weight:700; color:var(--white); line-height:1.8;">
-      نبني معكم — لا نبيعكم.<br>
-      <span style="color:var(--teal);">قدرة</span> — شريككم التقني لما هو قادم.
+  <div class="cta-box">
+    <p>
+      لا نبيعكم خدمة — نبني معكم منتجاً.<br>
+      <span style="color:var(--teal);">نحن شريككم التقني لما هو قادم.</span>
     </p>
   </div>
 
-  <div class="slide-footer">
-    <span>قدرة — عرض الشراكة التقنية</span>
+  <div class="slide-foot">
+    <span>مقترح شراكة تقنية — منصة متعددة الخدمات</span>
     <span>وثيقة سرّية</span>
   </div>
 </section>
